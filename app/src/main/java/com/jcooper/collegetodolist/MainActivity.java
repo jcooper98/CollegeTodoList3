@@ -9,33 +9,27 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+
+
 public class MainActivity extends AppCompatActivity {
 
-    Assignment assignmentList;
-    ArrayAdapter<Assignment> assignmentAdapter;  // The custom array adapter for displaying the heart rates in the list view
+    ArrayList<Assignment> assignmentList;
     ListView AssignmentsListView;                       // The list view for the heart rates from the activity_main.xml file
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         AssignmentsListView = (ListView) findViewById(R.id.listViewAssignments);
 
+        assignmentList = new ArrayList<Assignment>();
+        assignmentList.add(new Assignment("Laundry", false));
+        assignmentList.add(new Assignment("Dishes", true));
 
-        assignmentList = new Assignment("Test", false);
-        assignmentList.getTitle();
-
-        
+        ArrayAdapter<Assignment> assignmentAdapter = new AssignmentAdapter(this, R.layout.todo_row, assignmentList);
         assignmentAdapter.setDropDownViewResource(R.layout.todo_row);
-        //lvHeartRates.setAdapter(hrAdapter);
-
-
-
-
-
+        AssignmentsListView.setAdapter(assignmentAdapter);
     }
 }
+
+
