@@ -3,6 +3,7 @@ package com.jcooper.collegetodolist;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,7 +30,27 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<Assignment> assignmentAdapter = new AssignmentAdapter(this, R.layout.todo_row, assignmentList);
         assignmentAdapter.setDropDownViewResource(R.layout.todo_row);
         AssignmentsListView.setAdapter(assignmentAdapter);
-    }
-}
 
+    }
+
+
+    public void onButtonClick(View view) {
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
