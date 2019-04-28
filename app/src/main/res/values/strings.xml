@@ -3,4 +3,6 @@
     <string name="textViewAssignment">null</string>
     <string name="textViewNewAssignment">New Assignment</string>
     <string name="editTitle">Title</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnNevermind">Nevermind</string>
 </resources>
