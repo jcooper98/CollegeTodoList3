@@ -3,7 +3,7 @@ package com.jcooper.collegetodolist;
 public class Assignment {
 
     String title = "";
-    Boolean done = false;
+    Boolean done = true;
 
     public Assignment(String title, Boolean done) {
         this.title = title;

@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ArrayList<Assignment> assignmentList;
-    ListView AssignmentsListView;                       // The list view for the heart rates from the activity_main.xml file
-    FloatingActionButton fab;   // THIS IS CAUSING THE CRASH
+    ListView AssignmentsListView;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, AssignmentDetail.class));
             }
         });
+
+        /*Bundle extras = getIntent().getExtras();
+        Assignment firstAssignment = (Assignment) extras.getSerializable("firstAssignment");
+        assignmentList.add(firstAssignment);*/
+
 
 
     }

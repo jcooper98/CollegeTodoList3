@@ -19,16 +19,26 @@ public class AssignmentDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.assignment_details);
-
         // setResult(MainActivity.RESULT_OK);
-
-
     }
+
+
 
 
     public void onClickNevermind(View view) {
         startActivity(new Intent(AssignmentDetail.this, MainActivity.class));
 
     }
+
+
+
+   /* public void onClickAdd(View view) {
+
+        Assignment firstAssignment = new Assignment("Title", false);
+
+        Intent detailActIntent = new Intent(this, MainActivity.class);
+            detailActIntent.putExtra("firstAssignment", firstAssignment);
+                startActivity(detailActIntent);
+    }*/
 
 }
