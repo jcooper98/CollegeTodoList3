@@ -1,6 +1,8 @@
 package com.jcooper.collegetodolist;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<Assignment> assignmentList;
     ListView AssignmentsListView;                       // The list view for the heart rates from the activity_main.xml file
+    FloatingActionButton fab;   // THIS IS CAUSING THE CRASH
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +34,18 @@ public class MainActivity extends AppCompatActivity {
         assignmentAdapter.setDropDownViewResource(R.layout.todo_row);
         AssignmentsListView.setAdapter(assignmentAdapter);
 
+        fab = (FloatingActionButton) findViewById(R.id.addFAB);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, AssignmentDetails.class));
+            }
+        });
+
+
     }
 
-
-    public void onButtonClick(View view) {
-
-
-    }
 
 
 
