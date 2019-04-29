@@ -1,9 +1,14 @@
 package com.jcooper.collegetodolist;
 
-public class Assignment {
+import android.widget.CheckBox;
+
+import java.io.Serializable;
+
+public class Assignment implements Serializable {
 
     String title = "";
     Boolean done = true;
+    CheckBox checkBox;
 
     public Assignment(String title, Boolean done) {
         this.title = title;
@@ -26,3 +31,5 @@ public class Assignment {
         this.done = done;
     }
 }
+
+

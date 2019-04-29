@@ -32,13 +32,14 @@ public class AssignmentDetail extends AppCompatActivity {
 
 
 
-   /* public void onClickAdd(View view) {
+    public void onClickAdd(View view) {
 
         Assignment firstAssignment = new Assignment("Title", false);
 
         Intent detailActIntent = new Intent(this, MainActivity.class);
             detailActIntent.putExtra("firstAssignment", firstAssignment);
                 startActivity(detailActIntent);
-    }*/
+    }
 
 }
+
