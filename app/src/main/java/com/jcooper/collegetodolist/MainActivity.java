@@ -2,6 +2,7 @@ package com.jcooper.collegetodolist;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,28 +41,23 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AssignmentDetail.class));
+                startActivity((new Intent(MainActivity.this, AssignmentDetail.class)));
             }
         });
-
-        //Bundle extras = getIntent().getExtras();
-        //Assignment firstAssignment = (Assignment) extras.getSerializable("firstAssignment");
-        //assignmentList.add(firstAssignment);
-
-
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
 
+                Bundle extras = getIntent().getExtras();
+                Assignment firstAssignment = (Assignment) extras.getSerializable("firstAssignment");
 
-
-
-
-
-
-
-
-
-
-
-
+                assignmentList.add(firstAssignment);
+            }
+        }
+    }
 }
+
+
 

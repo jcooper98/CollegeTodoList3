@@ -2,6 +2,7 @@ package com.jcooper.collegetodolist;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,8 +24,6 @@ public class AssignmentDetail extends AppCompatActivity {
     }
 
 
-
-
     public void onClickNevermind(View view) {
         startActivity(new Intent(AssignmentDetail.this, MainActivity.class));
 
@@ -32,14 +31,19 @@ public class AssignmentDetail extends AppCompatActivity {
 
 
 
+
+
+    static final int REQUEST_CODE = 1;  // The request code
+
+
     public void onClickAdd(View view) {
-
         Assignment firstAssignment = new Assignment("Title", false);
-
         Intent detailActIntent = new Intent(this, MainActivity.class);
-            detailActIntent.putExtra("firstAssignment", firstAssignment);
-                startActivity(detailActIntent);
+        detailActIntent.putExtra("firstAssignment", firstAssignment);
+        startActivityForResult(detailActIntent, REQUEST_CODE);
+
     }
+
 
 }
 
