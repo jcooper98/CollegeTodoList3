@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -18,7 +21,9 @@ public class AssignmentDetail extends AppCompatActivity {
     EditText editTitle;
     EditText editDate;
     Boolean editDone = false;
+    String key = "";
     AssignmentFirebaseData assignmentDataSource;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +44,17 @@ public class AssignmentDetail extends AppCompatActivity {
 
     public void onClickAdd(View view) {
         // create a sample assignment to return
-        Assignment asg = new Assignment(editTitle.getText().toString(), false);
+        Assignment asg = new Assignment(key, editTitle.getText().toString(), false);
         // create an intent to hold the result to be returned to the MainActivity
-        Intent intent = new Intent();
-        intent.putExtra("firstAssignment", asg);
-        setResult(RESULT_OK, intent);
-
 
 
         //String title = editTitle.getText().toString();
-        //String done = editDone.
-        //assignmentDataSource.createAssignment(asg);
+        //Boolean done = editDone;
+        assignmentDataSource.createAssignment(editTitle.getText().toString(), false);
 
-
+        Intent intent = new Intent();
+        intent.putExtra("firstAssignment", asg);
+        setResult(RESULT_OK, intent);
 
 
         finish();
@@ -59,16 +62,12 @@ public class AssignmentDetail extends AppCompatActivity {
 
     public void addEventToCalendar(View view) {
 
-
         // create a sample assignment to return
-        Assignment asg = new Assignment(editTitle.getText().toString(), false);
+        Assignment asg = new Assignment(key, editTitle.getText().toString(), false);
         // create an intent to hold the result to be returned to the MainActivity
         Intent intent = new Intent();
         intent.putExtra("firstAssignment", asg);
         setResult(RESULT_OK, intent);
-
-
-
 
         Date myDate = null;
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -80,7 +79,6 @@ public class AssignmentDetail extends AppCompatActivity {
 
         Calendar beginTime = Calendar.getInstance();
         beginTime.set(myDate.getYear() + 1900, myDate.getMonth(), myDate.getDate());
-
         Calendar endTime = Calendar.getInstance();
         endTime.set(myDate.getYear() + 1900, myDate.getMonth(), myDate.getDate());
 

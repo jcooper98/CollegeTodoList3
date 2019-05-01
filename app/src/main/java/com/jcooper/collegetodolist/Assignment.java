@@ -11,9 +11,10 @@ public class Assignment implements Serializable {
     CheckBox checkBox;
     private String key;
 
-    public Assignment(String title, Boolean done) {
+    public Assignment(String key, String title, Boolean done) {
         this.title = title;
         this.done = done;
+        this.key = key;
     }
 
     public String getTitle() {

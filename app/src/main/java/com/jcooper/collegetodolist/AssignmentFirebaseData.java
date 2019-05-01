@@ -10,6 +10,8 @@ import java.util.List;
 public class AssignmentFirebaseData {
     DatabaseReference myAssignmentDbRef;
     public static final String AssignmentDataTag = "Assignment Data";
+    AssignmentFirebaseData assignmentDataSource;
+
 
 
     public DatabaseReference open()  {
@@ -22,13 +24,29 @@ public class AssignmentFirebaseData {
     public Assignment createAssignment( String title, Boolean done) {           //Added String rating as a parameter
         // ---- Get a new database key for the vote
         String key = myAssignmentDbRef.child(AssignmentDataTag).push().getKey();
-//        String key = "REPLACE THIS WITH KEY FROM DATABASE";
+
         // ---- set up the assignment object
-        Assignment newAssignment = new Assignment(title, done);
+        Assignment newAssignment = new Assignment(key, title, done);
+
         // ---- write the vote to Firebase
         myAssignmentDbRef.child(key).setValue(newAssignment);
+
+        /*assignmentDataSource = new AssignmentFirebaseData();
+        assignmentDataSource.open();
+        myAssignmentDbRef.setValue(newAssignment);*/
+
         return newAssignment;
     }
+
+
+
+
+
+
+
+
+
+
 
 
     public void deleteAssignment(Assignment assignment) {
