@@ -39,14 +39,13 @@ public class AssignmentAdapter extends ArrayAdapter<Assignment> {
         CheckBox checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
         tvItem.setText(item.getTitle());
+        //checkBox.setChecked();
+
 
         return(view);
     }
 
-    public void onCheckboxClicked(View view){
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-    }
+
 
 
 }

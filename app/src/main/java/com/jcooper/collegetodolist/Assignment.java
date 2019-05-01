@@ -9,6 +9,7 @@ public class Assignment implements Serializable {
     String title = "";
     Boolean done = true;
     CheckBox checkBox;
+    private String key;
 
     public Assignment(String title, Boolean done) {
         this.title = title;
@@ -29,6 +30,10 @@ public class Assignment implements Serializable {
 
     public void setDone(Boolean done) {
         this.done = done;
+    }
+
+    public String getKey() {
+        return key;
     }
 }
 

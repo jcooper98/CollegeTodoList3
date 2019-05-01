@@ -5,4 +5,6 @@
     <string name="editTitle">Title</string>
     <string name="btnAdd">Add</string>
     <string name="btnNevermind">Nevermind</string>
+    <string name="btnCalandarAdd">Add to Calendar</string>
+    <string name="editDate">mm-dd-yyyy</string>
 </resources>

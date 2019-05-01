@@ -17,6 +17,8 @@ public class AssignmentDetail extends AppCompatActivity {
     static final int REQUEST_CODE = 1;  // The request code
     EditText editTitle;
     EditText editDate;
+    Boolean editDone = false;
+    AssignmentFirebaseData assignmentDataSource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +45,30 @@ public class AssignmentDetail extends AppCompatActivity {
         intent.putExtra("firstAssignment", asg);
         setResult(RESULT_OK, intent);
 
+
+
+        //String title = editTitle.getText().toString();
+        //String done = editDone.
+        //assignmentDataSource.createAssignment(asg);
+
+
+
+
         finish();
     }
 
     public void addEventToCalendar(View view) {
+
+
+        // create a sample assignment to return
+        Assignment asg = new Assignment(editTitle.getText().toString(), false);
+        // create an intent to hold the result to be returned to the MainActivity
+        Intent intent = new Intent();
+        intent.putExtra("firstAssignment", asg);
+        setResult(RESULT_OK, intent);
+
+
+
 
         Date myDate = null;
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -62,7 +84,7 @@ public class AssignmentDetail extends AppCompatActivity {
         Calendar endTime = Calendar.getInstance();
         endTime.set(myDate.getYear() + 1900, myDate.getMonth(), myDate.getDate());
 
-        Intent intent = new Intent(Intent.ACTION_INSERT)
+        Intent calendarIntent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                 .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
@@ -71,6 +93,6 @@ public class AssignmentDetail extends AppCompatActivity {
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, "")
                 .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
                 .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
-            startActivity(intent);
+            startActivity(calendarIntent);
     }
 }

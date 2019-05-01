@@ -12,6 +12,9 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,17 +30,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AssignmentsListView = (ListView) findViewById(R.id.listViewAssignments);
+        fab = (FloatingActionButton) findViewById(R.id.addFAB);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
+
+
+
+
+        // Write a message to the database
+        //FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference("message");
+
+        //myRef.setValue("Hello, World!2");
+
+        //boolean test = false;
+       // String test2 = "Test";
 
         assignmentList = new ArrayList<Assignment>();
-        //assignmentList.add(new Assignment("Laundry", false));
+        //assignmentList.add(new Assignment(test2, test));
         //assignmentList.add(new Assignment("Dishes", true));
 
         assignmentAdapter = new AssignmentAdapter(this, R.layout.todo_row, assignmentList);
         assignmentAdapter.setDropDownViewResource(R.layout.todo_row);
         AssignmentsListView.setAdapter(assignmentAdapter);
-
-        fab = (FloatingActionButton) findViewById(R.id.addFAB);
-        checkBox = (CheckBox) findViewById(R.id.checkBox);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +77,48 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
+/*
+    public void onClickCheckbox(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        // Set the assignment object
+
+
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox_meat:
+                if (checked)
+                // Put some meat on the sandwich
+            else
+                // Remove the meat
+                break;
+            case R.id.checkbox_cheese:
+                if (checked)
+                // Cheese me
+            else
+                // I'm lactose intolerant
+                break;
+            // TODO: Veggie sandwich
+        }
+    }
+
+
+
+*/
+
+
+
 }
 
 
