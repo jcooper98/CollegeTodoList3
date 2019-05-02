@@ -37,5 +37,3 @@ public class Assignment implements Serializable {
         return key;
     }
 }
-
-
