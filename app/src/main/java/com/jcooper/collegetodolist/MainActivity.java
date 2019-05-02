@@ -6,16 +6,21 @@ import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     ArrayAdapter<Assignment> assignmentAdapter;
     CheckBox checkBox;
+    AssignmentFirebaseData assignmentDataSource;
+    DatabaseReference myAssignmentDbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +39,11 @@ public class MainActivity extends AppCompatActivity {
         AssignmentsListView = (ListView) findViewById(R.id.listViewAssignments);
         fab = (FloatingActionButton) findViewById(R.id.addFAB);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
+        assignmentDataSource = new AssignmentFirebaseData();
 
-
-
-
-        // Write a message to the database
-        //FirebaseDatabase database = FirebaseDatabase.getInstance();
-        //DatabaseReference myRef = database.getReference("message");
-
-        //myRef.setValue("Hello, World!2");
-
-        //boolean test = false;
-       // String test2 = "Test";
+        setupFirebaseDataChange();
 
         assignmentList = new ArrayList<Assignment>();
-        //assignmentList.add(new Assignment(test2, test));
-        //assignmentList.add(new Assignment("Dishes", true));
 
         assignmentAdapter = new AssignmentAdapter(this, R.layout.todo_row, assignmentList);
         assignmentAdapter.setDropDownViewResource(R.layout.todo_row);
@@ -69,9 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //Bundle extras = getIntent().getExtras();
                 Bundle extras = data.getExtras();
-                Assignment firstAssignment = (Assignment) extras.getSerializable("firstAssignment");
 
-                assignmentList.add(firstAssignment);
+
                 // Need to add this to tell listview that data has been updated
                 assignmentAdapter.notifyDataSetChanged();
             }
@@ -79,46 +74,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private void setupFirebaseDataChange() {
+        assignmentDataSource = new AssignmentFirebaseData();
+        myAssignmentDbRef = assignmentDataSource.open();
+        myAssignmentDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("CIS3334", "Starting onDataChange()");        // debugging log
+                assignmentList = assignmentDataSource.getAllAssignments(dataSnapshot);
+                // Instantiate a custom adapter for displaying each fish
+                assignmentAdapter = new AssignmentAdapter(MainActivity.this, android.R.layout.simple_list_item_single_choice, assignmentList);
+                // Apply the adapter to the list
+                AssignmentsListView.setAdapter(assignmentAdapter);
+            }
 
-/*
-    public void onClickCheckbox(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-        // Set the assignment object
-
-
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("CIS3334", "onCancelled: ");
+            }
+        });
     }
-
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-        // Check which checkbox was clicked
-        switch(view.getId()) {
-            case R.id.checkbox_meat:
-                if (checked)
-                // Put some meat on the sandwich
-            else
-                // Remove the meat
-                break;
-            case R.id.checkbox_cheese:
-                if (checked)
-                // Cheese me
-            else
-                // I'm lactose intolerant
-                break;
-            // TODO: Veggie sandwich
-        }
-    }
-
-
-
-*/
-
-
-
 }
 
 

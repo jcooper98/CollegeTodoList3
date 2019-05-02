@@ -1,15 +1,15 @@
 package com.jcooper.collegetodolist;
 
-import android.widget.CheckBox;
-
 import java.io.Serializable;
 
 public class Assignment implements Serializable {
 
     String title = "";
     Boolean done = true;
-    CheckBox checkBox;
     private String key;
+
+    public Assignment() {
+    }
 
     public Assignment(String key, String title, Boolean done) {
         this.title = title;

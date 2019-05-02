@@ -20,10 +20,8 @@ public class AssignmentDetail extends AppCompatActivity {
     static final int REQUEST_CODE = 1;  // The request code
     EditText editTitle;
     EditText editDate;
-    Boolean editDone = false;
     String key = "";
     AssignmentFirebaseData assignmentDataSource;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,30 +30,23 @@ public class AssignmentDetail extends AppCompatActivity {
         setResult(MainActivity.RESULT_OK);
         editTitle = findViewById(R.id.editTitle);
         editDate = findViewById(R.id.editDate);
-
+        assignmentDataSource = new AssignmentFirebaseData();
     }
-
 
     public void onClickNevermind(View view) {
         setResult(RESULT_CANCELED);
         finish();
     }
 
-
     public void onClickAdd(View view) {
         // create a sample assignment to return
         Assignment asg = new Assignment(key, editTitle.getText().toString(), false);
         // create an intent to hold the result to be returned to the MainActivity
 
-
-        //String title = editTitle.getText().toString();
-        //Boolean done = editDone;
         assignmentDataSource.createAssignment(editTitle.getText().toString(), false);
-
         Intent intent = new Intent();
         intent.putExtra("firstAssignment", asg);
         setResult(RESULT_OK, intent);
-
 
         finish();
     }
